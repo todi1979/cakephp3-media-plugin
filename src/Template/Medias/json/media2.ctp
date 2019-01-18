@@ -47,7 +47,7 @@ $json['content'] = "<div class=\"gallery-item {$thumb}\" id=\"gallery-{$media->i
 			</label>
 			<label class=\"settings\">
 				<span>{$alt}</span>
-				<input class=\"alt\" name=\"alt\" type=\"text\">
+				{$this->Form->input('alt', ['class' => 'alt autosubmit', 'div' => false, 'label' => false, 'value' => $name])}
 			</label>
 			<label class=\"settings\">
 				<span>{$caption}</span>
@@ -57,7 +57,7 @@ $json['content'] = "<div class=\"gallery-item {$thumb}\" id=\"gallery-{$media->i
 				<span>{$target}</span>
 				<input class=\"href\" name=\"href\" type=\"text\" disabled value=\"{$this->Url->build($media->file)}\">
 			</label>
-			<h3>{$settings}</h3>
+			<!--h3>{$settings}</h3>
 			<div class=\"settings media-alignment\">
 				<span>{$aligment}</span>
 				<select name=\"align\" class=\"align\">
@@ -66,7 +66,7 @@ $json['content'] = "<div class=\"gallery-item {$thumb}\" id=\"gallery-{$media->i
 					<option value=\"left\">{$left}</option>
 					<option value=\"right\">{$right}</option>
 				</select>
-			</div>
+			</div-->
 			<input type=\"hidden\" class=\"filetype\" name=\"filetype\" value=\"{$media->file_type}\" />
 			<input type=\"hidden\" name=\"file\" value=\"{$this->Url->build($media->file)}\" class=\"path\">
 		{$this->Form->end()}

@@ -27,7 +27,7 @@
 			</label>
 			<?php if($media->file_type == 'pic'): ?>
 			<label class="settings"> <span><?= __d('media',"Alt text"); ?></span>
-			<input class="alt" name="alt" type="text">
+                <?= $this->Form->input('alt', ['class' => 'alt autosubmit', 'div' => false, 'label' => false, 'value' => $media->alt ? $media->alt : pathinfo($media->file, PATHINFO_FILENAME)]); ?>
 		</label>
 			<?php endif; ?>
 			<label class="settings"> <span><?= __d('media',"Caption"); ?></span>
@@ -37,7 +37,7 @@
 			value="<?= $this->Url->build($media->file); ?>">
 		</label>
 			<?php if($media->file_type == 'pic'): ?>
-			<h3><?= __d('media', "Display settings"); ?></h3>
+			<!--h3><?= __d('media', "Display settings"); ?></h3>
 		<div class="settings media-alignment">
 			<span><?= __d('media',"Alignment"); ?></span> <select name="align"
 				class="align">
@@ -46,7 +46,7 @@
 				<option value="left"><?= __d('media','Left'); ?></option>
 				<option value="right"><?= __d('media','Right'); ?></option>
 			</select>
-		</div>
+		</div-->
 			<?php endif; ?>
 			<input type="hidden" class="filetype" name="filetype"
 			value="<?= $media->file_type; ?>" /> <input type="hidden" name="file"

@@ -10,17 +10,19 @@
 			</div>
 		</div>
 		<div class="column-settings">
-			<label class="settings"> <span><?= __d('media',"Title"); ?></span> <input
-				type="text" class="title" name="title"
-				value="<?= basename($data['src']); ?>">
-			</label> <label class="settings"> <span><?= __d('media',"Alt text"); ?></span>
-				<input class="alt" name="alt" type="text"
-				value="<?= $data['alt']; ?>">
-			</label> <label class="settings"> <span><?= __d('media',"Caption"); ?></span>
+			<label class="settings">
+                <span><?= __d('media',"Title"); ?></span>
+                <input type="text" class="title" name="title" value="<?= basename($data['src']); ?>">
+			</label>
+            <label class="settings">
+                <span><?= __d('media',"Alt text"); ?></span>
+				<input class="alt sutosubmit" name="alt" type="text" value="<?= $data['alt']; ?>">
+			</label>
+            <label class="settings"> <span><?= __d('media',"Caption"); ?></span>
 				<textarea class="caption" name="caption"><?= $data['caption']; ?></textarea>
 			</label> <input type="hidden" class="filetype" name="filetype"
 				value="<?= $data['type']; ?>" />
-			<h3><?= __d('media', "Display settings"); ?></h3>
+			<!--h3><?= __d('media', "Display settings"); ?></h3>
 			<div class="settings media-alignment">
 				<span><?= __d('media',"Alignment"); ?></span>
 				<div class="btn-group" role="group">
@@ -37,7 +39,7 @@
 						class="btn btn-default <?= $data['class'] == 'align' || $this->request->query['class'] == '' ? 'active' : '' ?>"
 						value="none"><?= __d('media','None'); ?></button>
 				</div>
-			</div>
+			</div-->
 		</div>
 	</div>
 </div>

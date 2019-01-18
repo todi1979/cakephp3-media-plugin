@@ -1,4 +1,5 @@
 <?php use Cake\Routing\Router ; ?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <div id="plupload">
 
 	<ul class="tabs">
@@ -104,8 +105,7 @@
 				removeTemplate($gallery, '#template');
 			}else{
 				removeTemplate($gallery, '#template');
-				//$item = $($.parseJSON(data).content);
-				$item = $(data.content);
+				$item = $($.parseJSON(data).content);
 				$item.addClass('is-active');
 				$('.gallery-item-infos').hide();
 				$('.gallery-item-infos', $item).show();

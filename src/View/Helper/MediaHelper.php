@@ -1,4 +1,5 @@
 <?php
+
 namespace Media\View\Helper;
 
 use Cake\View\Helper;
@@ -33,79 +34,32 @@ class MediaHelper extends Helper
         parent::__construct($View, $config);
     }
 
-    /**
-     *
-     * @param string $fieldName
-     *            Database field name
-     * @param string $ref
-     *            Table name
-     * @param int $refId
-     *            Entity ID
-     * @param array $options
-     *            FormHelper options
-     *            
-     * @return string
-     */
-    public function tinymce($fieldName, $ref, $refId, array $options = [])
+    public function tinymce($field, $ref, $ref_id, $options = array())
     {
-        $this->Html->script('/media/js/tinymce/tinymce.min.js', [
-            'block' => true
-        ]);
-        $this->Html->script('/media/js/tinymce/editor.js', [
-            'block' => true
-        ]);
-        return $this->textarea($fieldName, $ref, $refId, 'tinymce', $options);
+        echo $this->Html->script('/media/js/tinymce/tinymce.min.js');
+        echo $this->Html->script('/media/js/tinymce/editor.js');
+        return $this->textarea($field, $ref, $ref_id, 'tinymce', $options);
     }
 
-    /**
-     *
-     * @param string $fieldName
-     *            Database field name
-     * @param string $ref
-     *            Table name
-     * @param int $refId
-     *            Entity ID
-     * @param array $options
-     *            FormHelper options
-     *            
-     * @return string
-     */
-    public function ckeditor($fieldName, $ref, $refId, array $options = [])
+    public function ckeditor($field, $ref, $ref_id, $options = array())
     {
-        $this->Html->script('/media/js/ckeditor/ckeditor.js', [
-            'block' => true
-        ]);
-        return $this->textarea($fieldName, $ref, $refId, 'ckeditor', $options);
+        echo $this->Html->script('/media/js/ckeditor/ckeditor.js');
+        return $this->textarea($field, $ref, $ref_id, 'ckeditor', $options);
     }
 
-    /**
-     *
-     * @param string $fieldName
-     *            Database field name
-     * @param string $ref
-     *            Table name
-     * @param int $refId
-     *            Entity ID
-     * @param bool|string $editor
-     *            Editor name
-     * @param array $options
-     *            FormHelper options
-     *            
-     * @return string
-     */
-    public function textarea($fieldName, $ref, $refId, $editor = false, array $options = [])
+    public function redactor($field, $ref, $ref_id, $options = array())
     {
-        $options = \array_merge([
-            'label' => false,
-            'style' => 'width:100%;height:500px',
-            'rows' => 160,
-            'type' => 'textarea',
-            'class' => "wysiwyg $editor"
-        ], $options);
-        $html = $this->Form->input($fieldName, $options);
-        if (isset($refId) && ! $this->explorer) {
-            $html .= '<input type="hidden" id="explorer" value="' . $this->Url->build('/media/medias/index/' . $ref . '/' . $refId) . '">';
-            $html .= '<input type="hidden" id="edit" value="' . $this->Url->build('/media/medias/edit/') . '">';
+        echo $this->Html->script('/media/js/redactor/redactor.min.js');
+        echo $this->Html->css('/media/js/redactor/redactor.css');
+        return $this->textarea($field, $ref, $ref_id, 'redactor', $options);
+    }
+
+    public function textarea($field, $ref, $ref_id, $editor = false, $options = array())
+    {
+        $options = array_merge(array('label' => false, 'style' => 'width:100%;height:300px', 'row' => 160, 'type' => 'textarea', 'class' => "wysiwyg $editor"), $options);
+        $html = $this->Form->input($field, $options);
+        if (isset($ref_id) && !$this->explorer) {
+            $html .= '<input type="hidden" id="explorer" value="' . $this->Url->build('/media/Medias/index/' . $ref . '/' . $ref_id) . '">';
             $this->explorer = true;
         }
         return $html;
@@ -117,11 +71,11 @@ class MediaHelper extends Helper
      *            Table name
      * @param int $refId
      *            Entity ID
-     *            
+     *
      * @return string
      */
     public function iframe($ref, $refId)
     {
-        return '<iframe src="' . $this->Url->build("/media/medias/index/$ref/$refId") . '" style="width:100%;" id="medias-' . $ref . '-' . $refId . '"></iframe>';
+        return '<iframe src="' . $this->Url->build("/media/medias/index/$ref/$refId") . '" style="width:100%;height:550px;" id="medias-' . $ref . '-' . $refId . '"></iframe>';
     }
 }

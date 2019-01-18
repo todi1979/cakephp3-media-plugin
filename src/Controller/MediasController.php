@@ -1,14 +1,14 @@
 <?php
 namespace Media\Controller;
 
+use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Routing\Router;
-use App\Controller\AdminController;
 
-class MediasController extends AdminController
+class MediasController extends AppController
 {
 
     /**
@@ -20,11 +20,12 @@ class MediasController extends AdminController
      */
     public function canUploadMedias($ref, $refId)
     {
-        if (method_exists('App\Controller\AdminController', 'canUploadMedias')) {
-            return \App\Controller\AdminController::canUploadMedias($ref, $refId);
+        /*if (method_exists('App\Controller\AppController', 'canUploadMedias')) {
+            return \App\Controller\AppController::canUploadMedias($ref, $refId);
         } else {
             return false;
-        }
+        }*/
+        return true;
     }
 
     /**
@@ -40,6 +41,7 @@ class MediasController extends AdminController
         if (in_array('Security', $this->components()->loaded())) {
             $this->Security->config('unlockedActions', [ 'index', 'edit', 'upload', 'order', 'thumb', 'update', 'delete' ]);
         }
+
     }
 
     /**
@@ -141,7 +143,6 @@ class MediasController extends AdminController
         $media = $this->Medias->patchEntity($media, $data, [
             'validate' => 'default'
         ]);
-
         if ($media->errors()) {
             echo json_encode([
                 'error' => $media->errors()
@@ -155,9 +156,8 @@ class MediasController extends AdminController
         $editor = isset($this->request->query['editor']) ? $this->request->query['editor'] : false;
         $id = isset($this->request->query['id']) ? $this->request->query['id'] : false;
         $this->set(\compact('media', 'thumbID', 'editor', 'id'));
-        $this->set('_serialize', false);
         $this->viewBuilder()->layout('json');
-        $this->render('media2');
+        $this->render('media');
     }
 
     /**
@@ -193,6 +193,7 @@ class MediasController extends AdminController
             }
             $data = [];
             $data['name'] = $this->request->data['name'] ? $this->request->data['name'] : null;
+            $data['alt'] = $this->request->data['alt'] ? $this->request->data['alt'] : null;
             $data['caption'] = $this->request->data['caption'] ? $this->request->data['caption'] : null;
             $media = $this->Medias->patchEntity($media, $data, [
                 'validate' => false

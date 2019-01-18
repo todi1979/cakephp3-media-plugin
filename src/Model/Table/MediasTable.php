@@ -31,7 +31,7 @@ class MediasTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('medias');
+        $this->table('media');
         $this->displayField('id');
         $this->primaryKey('id');
     }
@@ -93,25 +93,29 @@ class MediasTable extends Table
             $search = [
                 '/',
                 '%id',
+                '%ID',
                 '%mid',
                 '%cid',
                 '%y',
                 '%m',
+                '%d',
                 '%f'
             ];
             $replace = [
                 DS,
                 $refId,
+                str_pad($refId, 4, '0', STR_PAD_LEFT),
                 ceil($refId / 1000),
                 ceil($refId / 100),
                 date('Y'),
                 date('m'),
+                date('d'),
                 \strtolower(Inflector::slug($filename))
             ];
             $file = \str_replace($search, $replace, $path) . '.' . $extension;
             $this->testDuplicate($file);
             if (! \file_exists(\dirname(WWW_ROOT . $file))) {
-                \mkdir(\dirname(WWW_ROOT . $file), 0777, true);
+                @\mkdir(\dirname(WWW_ROOT . $file), 0777, true);
             }
             $this->moveUploadedFile($options['file']['tmp_name'], WWW_ROOT . $file);
             @\chmod(WWW_ROOT . $file, 0777);
