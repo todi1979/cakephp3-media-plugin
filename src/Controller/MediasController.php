@@ -110,6 +110,7 @@ class MediasController extends AppController
             $data['alt'] = basename($media['file']);
             $data['class'] = '';
             $data['caption'] = $media['caption'];
+            $data['link'] = $media['link'];
             $data['editor'] = isset($this->request->query['editor']) ? $this->request->query['editor'] : false;
             $data['ref'] = $media->ref;
             $data['ref_id'] = $media->ref_id;
@@ -195,6 +196,7 @@ class MediasController extends AppController
             $data['name'] = $this->request->data['name'] ? $this->request->data['name'] : null;
             $data['alt'] = $this->request->data['alt'] ? $this->request->data['alt'] : null;
             $data['caption'] = $this->request->data['caption'] ? $this->request->data['caption'] : null;
+            $data['link'] = $this->request->data['link'] ? $this->request->data['link'] : null;
             $media = $this->Medias->patchEntity($media, $data, [
                 'validate' => false
             ]);

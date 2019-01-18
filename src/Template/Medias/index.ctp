@@ -225,6 +225,20 @@
 						html ='<a href="'+$('.href', item).val()+'" class="zoombox"	title="'+$('.title', item).val()+'">' + img + '</a>'; 
 					} 
 				} 
+				if( $('.link', item).val() != ''){ 
+					
+					var figStart = '<figure>'; 
+					var figEnd = '</figure>'; 
+					var link = '<figcaption>"' + $('.link', item).val() + '"</figcaption>'; 
+					
+					if( $('.href', item).val() != '' ){ 
+						html = figStart + '<a href="'+$('.href', item).val()+'" class="zoombox"	title="'+$('.title', item).val()+'">' + img + '</a>' + link + figEnd; 
+					} 
+				} else { 
+					if( $('.href', item).val() != '' ){ 
+						html ='<a href="'+$('.href', item).val()+'" class="zoombox"	title="'+$('.title', item).val()+'">' + img + '</a>'; 
+					} 
+				} 
 			} else { 
 				var title = ''; 
 				if($('.title', item).val() == ''){ 

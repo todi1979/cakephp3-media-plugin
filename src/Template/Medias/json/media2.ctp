@@ -9,6 +9,7 @@ $name = pathinfo($media->file, PATHINFO_FILENAME);
 $alt = __d('media', 'Alt text');
 $target = __d('media', 'Target');
 $caption = __d('media', 'Caption');
+$link = __d('media', 'Link');
 $settings = __d('media', "Display settings");
 $aligment = __d('media', 'Alignment');
 $none = __d('media', 'None');
@@ -52,6 +53,10 @@ $json['content'] = "<div class=\"gallery-item {$thumb}\" id=\"gallery-{$media->i
 			<label class=\"settings\">
 				<span>{$caption}</span>
 				{$this->Form->input('caption', ['class' => 'caption autosubmit', 'div' => false, 'label' => false])}
+			</label>
+			<label class=\"settings\">
+				<span>{$link}</span>
+				{$this->Form->input('link', ['class' => 'link autosubmit', 'div' => false, 'label' => false])}
 			</label>
 			<label class=\"settings\">
 				<span>{$target}</span>

@@ -32,7 +32,11 @@
 			<?php endif; ?>
 			<label class="settings"> <span><?= __d('media',"Caption"); ?></span>
 				<?= $this->Form->input('caption', ['class' => 'caption autosubmit', 'div' => false, 'label' => false]); ?>
-			</label> <label class="settings"> <span><?= __d('media',"Target"); ?></span>
+			</label>
+			<label class="settings"> <span><?= __d('media',"Link"); ?></span>
+				<?= $this->Form->input('link', ['class' => 'link autosubmit', 'div' => false, 'label' => false]); ?>
+			</label>
+			<label class="settings"> <span><?= __d('media',"Target"); ?></span>
 			<input class="href" name="href" type="text" disabled
 			value="<?= $this->Url->build($media->file); ?>">
 		</label>
