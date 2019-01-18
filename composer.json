@@ -2,7 +2,7 @@
 	"name" : "todi1979/cakephp3-media-plugin",
 	"description" : "Media plugin for CakePHP 3",
 	"type" : "cakephp-plugin",
-	license": "MIT",
+	"license": "MIT",
 	"require" : {
 		"php" : ">=5.4.0"
 	},
