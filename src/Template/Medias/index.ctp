@@ -110,6 +110,7 @@
 				$('.gallery-item-infos').hide();
 				$('.gallery-item-infos', $item).show();
 				$('.gallery').prepend($item);
+				updateOrder();
 			}
 		},
 		uploadprogress: function(file, percent) {
@@ -135,8 +136,11 @@
 	$('.gallery').sortable({
 		items: '.gallery-item',
 		handle: '.gallery-item-thumb',
-		update: function(event, ui) {
-    	var order = $(this).sortable("toArray", {attribute: "data-id"});
+		update: updateOrder,
+	});
+
+	function updateOrder(){
+		var order = $('.gallery').sortable("toArray", {attribute: "data-id"});
     	var ids = {};
     	for(var i in order){
     		ids[order[i]] = i;
@@ -145,8 +149,7 @@
     	$.post('<?= $this->Url->build(['action' => 'order']); ?>', {Media: ids}, function(data){
     		$loader.stop().fadeOut();
     	});
-    }
-	});
+	}
 
 	$('.gallery').disableSelection();
 
@@ -173,8 +176,11 @@
 		if (confirm("<?= __d('media','Do you really want to delete this file ?'); ?>")) {
 			$this = $(this);
 			$.get($(this).attr('href'), {}, function(){
-				$this.parents('.gallery-item').fadeOut();
-			});
+				$this.parents('.gallery-item').fadeOut(300,function(){
+					$(this).remove();
+					updateOrder();
+				});
+			})
 		}
 	});
 	$('.gallery').on('blur', '.autosubmit', function(){
@@ -254,6 +260,3 @@
 })(jQuery);
 
 <?= $this->Html->scriptEnd(); ?>
-
-
-
