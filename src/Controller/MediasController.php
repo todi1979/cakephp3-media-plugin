@@ -69,7 +69,7 @@ class MediasController extends AppController
                 'ref_id' => $refId,
                 'ref' => $ref
             ]
-        ])->toArray();
+        ])->order(['position' => 'ASC'])->toArray();
         $medias = ! empty($medias) ? $medias : [];
         $thumbID = false;
         if ($this->$ref->hasField('media_id')) {
